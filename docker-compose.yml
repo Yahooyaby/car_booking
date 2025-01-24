@@ -5,7 +5,7 @@ services:
         build:
             context: ./php
             dockerfile: Dockerfile
-        container_name: php-84
+        container_name: app
         volumes:
            - ./:/var/www
         networks:
@@ -27,12 +27,13 @@ services:
 
     mysql:
         image: mysql:8.0
-        container_name: mysql-8.0
+        container_name: mysql
         restart: unless-stopped
         ports:
             - "3306:3306"
         environment:
-            - MYSQL_ROOT_PASSWORD=${DB_PASS}
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+            - MYSQL_DATABASE=$(DB_DATABASE}
         volumes:
             - db_data:/var/lib/mysql
         networks:
