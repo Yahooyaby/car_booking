@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+    app:
+        build:
+            context: ./php
+            dockerfile: Dockerfile
+        container_name: php-84
+        volumes:
+           - ./:/var/www
+        networks:
+            - app-network
+        command: bash -c "composer install && php-fpm"
+
+    webserver:
+        image: nginx:latest
+        container_name: nginx-server
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+            - ./public:/var/www/html
+        networks:
+            - app-network
+        depends_on:
+            - app
+
+    mysql:
+        image: mysql:8.0
+        container_name: mysql-8.0
+        restart: unless-stopped
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_ROOT_PASSWORD=${DB_PASS}
+        volumes:
+            - db_data:/var/lib/mysql
+        networks:
+            - app-network
+
+networks:
+    app-network:
+        driver: bridge
+
+volumes:
+    db_data:
