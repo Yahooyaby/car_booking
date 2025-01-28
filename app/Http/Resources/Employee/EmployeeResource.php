@@ -15,7 +15,6 @@ class EmployeeResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'position_id' => $this->position_id,
-            'position' => PositionResource::make($this->whenLoaded('position')),
             'password' => $this->password,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
