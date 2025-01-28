@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservationRequest;
+use App\Http\Resources\Reservation\ReservationResource;
 use App\Models\Reservation;
 
 class ReservationController extends Controller
@@ -14,9 +15,9 @@ class ReservationController extends Controller
 
         $reservation = Reservation::create($data);
 
-        return response()->json([
-            'message' => 'Reservation created successfully',
-            'reservation' => $reservation,
+        return ReservationResource::make($reservation)->
+        addiational([
+            'message' => 'Reservation created successfully'
         ]);
     }
 

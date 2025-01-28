@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
+    /* @property int $id - id категории
+     * @property string $category - название категории
+     * @property datetime $created_at - дата создания
+     * @property datetime $updated_at - дата обновления
+     */
+
     protected $fillable = [
         'category'
     ];

@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Car extends Model
 {
+    /* @property int $id - id машины
+     * @property string $model - название модели
+     * @property int $category_id - id категории машины
+     * @property datetime $created_at - дата создания
+     * @property datetime $updated_at - дата обновления
+     */
+
     protected $fillable = [
         'model',
         'category_id',

@@ -38,8 +38,9 @@ class CarController extends Controller
 
         $builder = QueryBuilder::for(Car::class);
 
-        $builder->select('model')->with([
+        $builder->with([
             'driver',
+            'category',
             'reservations' => function ($query) {
                 $query->future();
             }
@@ -49,9 +50,9 @@ class CarController extends Controller
             fn($query) => $query->where(
                 fn($query) => $query->where('started_at', '<=', $ended_at)->where('ended_at', '>=', $started_at)
             )
-                ->orWhere(
-                    fn($query) => $query->where('ended_at', '>=', $started_at)->where('started_at', '<=', $ended_at)
-                )
+            ->orWhere(
+                fn($query) => $query->where('ended_at', '>=', $started_at)->where('started_at', '<=', $ended_at)
+            )
         );
 
         $builder->allowedSorts(['id', 'model', 'category_id', 'driver_id']);

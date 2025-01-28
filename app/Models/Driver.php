@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Driver extends Model
 {
+    /* @property int $id - id водителя
+     * @property string $name - имя водителя
+     * @property datetime $created_at - дата создания
+     * @property datetime $updated_at - дата обновления
+     */
+
     public $fillable = [
         'name',
     ];

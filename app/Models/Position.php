@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Position extends Model
 {
+    /* @property int $id - id должности
+     * @property string $position - название должности
+     * @property datetime $created_at - дата создания
+     * @property datetime $updated_at - дата обновления
+     */
+
     protected $fillable = [
         'position',
     ];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EmployeeStoreRequest;
+use App\Http\Resources\Employee\EmployeeResource;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -22,6 +23,9 @@ class StoreController extends Controller
             $token = $employee->createToken('EmployeeToken')->plainTextToken;
         }
 
-        return response()->json(['message' => 'Employee added successfully.', 'token' => $token]);
+        return EmployeeResource::make($employee)->addiational([
+            'message' => 'Employee created successfully',
+            'token' => $token ?? null
+        ]);
     }
 }

@@ -11,6 +11,15 @@ class Employee extends Authenticatable
 {
     use HasApiTokens;
 
+    /* @property int $id - id сотрудника
+     * @property string $name - имя сотрудника
+     * @property string $email - адрес электронной почты
+     * @property int $position_id - id должности сотрудника
+     * @property int $password - пароль
+     * @property datetime $created_at - дата создания
+     * @property datetime $updated_at - дата обновления
+     */
+
     protected $fillable = [
         'name',
         'email',

@@ -8,6 +8,15 @@ use Illuminate\Support\Carbon;
 
 class Reservation extends Model
 {
+    /* @property int $id - id бронирования
+     * @property int $employee_id - id сотрудника
+     * @property int $car_id - id машины
+     * @property datetime $started_at - время начала бронирования водителя
+     * @property datetime $ended_at - время окончания бронирования водителя
+     * @property datetime $created_at - дата создания
+     * @property datetime $updated_at - дата обновления
+     */
+
     protected $fillable = [
         'employee_id',
         'car_id',

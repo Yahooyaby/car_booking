@@ -20,12 +20,12 @@ class CarResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'model' => $this->model,
             'category_id' => $this->category_id,
             'driver_id' => $this->driver_id,
             'driver' => DriverResource::make($this->whenLoaded('driver')),
             'reservations' => ReservationResource::collection($this->whenLoaded('reservations')),
-            'id' => $this->id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
