@@ -8,6 +8,13 @@ use App\Models\Reservation;
 
 class ReservationController extends Controller
 {
+    public function show(int $id)
+    {
+        $reservation = Reservation::with(['car','employee'])->findOrFail($id);
+
+        return new ReservationResource($reservation);
+    }
+
     public function store(ReservationRequest $request)
     {
         $data = $request->validated();
