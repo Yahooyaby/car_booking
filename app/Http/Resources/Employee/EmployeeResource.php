@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Employee;
 
+use App\Http\Resources\Position\PositionResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,6 +15,7 @@ class EmployeeResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'position_id' => $this->position_id,
+            'position' => PositionResource::collection($this->whenLoaded('position')),
             'password' => $this->password,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

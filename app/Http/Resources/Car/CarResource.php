@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Car;
 
+use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Driver\DriverResource;
 use App\Http\Resources\Reservation\ReservationResource;
 use App\Models\Car;
@@ -23,6 +24,7 @@ class CarResource extends JsonResource
             'id' => $this->id,
             'model' => $this->model,
             'category_id' => $this->category_id,
+            'category' => CategoryResource::make($this->whenLoaded('category')),
             'driver_id' => $this->driver_id,
             'driver' => DriverResource::make($this->whenLoaded('driver')),
             'reservations' => ReservationResource::collection($this->whenLoaded('reservations')),
