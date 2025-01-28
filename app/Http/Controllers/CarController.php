@@ -38,7 +38,13 @@ class CarController extends Controller
 
         $builder = QueryBuilder::for(Car::class);
 
-        $builder->select('model')->whereIn('category_id', $categories)->whereDoesntHave(
+        $builder->select('model')->with([
+            'driver',
+            'reservations' => function ($query) {
+                $query->future();
+            }
+        ])->whereIn('category_id', $categories)
+            ->whereDoesntHave(
             'reservations',
             fn($query) => $query->where(
                 fn($query) => $query->where('started_at', '<=', $ended_at)->where('ended_at', '>=', $started_at)
