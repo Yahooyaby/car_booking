@@ -22,14 +22,14 @@ class EmployeeStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required','string','min:5'],
-            'email' => ['required','unique:employees,email','email'],
-            'password' => ['required','min:8'],
+            'name' => ['required', 'string', 'min:5'],
+            'email' => ['required', 'unique:employees,email', 'email'],
+            'password' => ['required', 'min:8'],
             'position_id' => ['required', 'integer', 'exists:positions,id'],
         ];
     }
 
-    public function messages():array
+    public function messages(): array
     {
         return [
             'required' => 'Поле :attribute не должно быть пустым',
@@ -43,7 +43,7 @@ class EmployeeStoreRequest extends FormRequest
         ];
     }
 
-    public function attributes():array
+    public function attributes(): array
     {
         return [
             'name' => 'Имя',

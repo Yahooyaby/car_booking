@@ -9,9 +9,9 @@ use Illuminate\Validation\Validator;
 class ReservationRequest extends FormRequest
 {
     public function authorize()
-{
-    return true;
-}
+    {
+        return true;
+    }
 
     public function rules()
     {

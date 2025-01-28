@@ -15,7 +15,7 @@ class Category extends Model
 
     public function cars(): HasMany
     {
-        $this->hasMany(Car::class);
+        return $this->hasMany(Car::class);
     }
 
     public function positions(): BelongsToMany

@@ -16,7 +16,7 @@ class CarController extends Controller
         try {
             $started_at = Carbon::parse($request->started_at);
             $ended_at = Carbon::parse($request->ended_at);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
@@ -38,11 +38,14 @@ class CarController extends Controller
 
         $builder = QueryBuilder::for(Car::class);
 
-        $builder->select('model')->whereIn('category_id', $categories)->whereDoesntHave('reservations', fn ($query) =>
-            $query->where(
-                fn ($query) => $query->where('started_at', '<=', $ended_at)->where('ended_at', '>=', $started_at))
+        $builder->select('model')->whereIn('category_id', $categories)->whereDoesntHave(
+            'reservations',
+            fn($query) => $query->where(
+                fn($query) => $query->where('started_at', '<=', $ended_at)->where('ended_at', '>=', $started_at)
+            )
                 ->orWhere(
-                    fn ($query) => $query->where('ended_at', '>=', $started_at)->where('started_at', '<=', $ended_at))
+                    fn($query) => $query->where('ended_at', '>=', $started_at)->where('started_at', '<=', $ended_at)
+                )
         );
 
         $builder->allowedSorts(['id', 'model', 'category_id', 'driver_id']);
@@ -53,6 +56,5 @@ class CarController extends Controller
         ]);
 
         return CarCollection::make($builder->get())->additional(['success' => true]);
-
     }
 }

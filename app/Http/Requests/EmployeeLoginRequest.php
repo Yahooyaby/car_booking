@@ -22,17 +22,19 @@ class EmployeeLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required','string'],
+            'email' => ['required', 'string'],
             'password' => ['required',]
         ];
     }
-    public function messages():array
+
+    public function messages(): array
     {
         return [
             'required' => 'Поле :attribute не должно быть пустым',
         ];
     }
-    public function attributes():array
+
+    public function attributes(): array
     {
         return [
             'email' => 'Почта',
