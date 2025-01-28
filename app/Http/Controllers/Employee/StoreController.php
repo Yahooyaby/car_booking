@@ -12,12 +12,10 @@ class StoreController extends Controller
 {
     public function __invoke(EmployeeStoreRequest $request)
     {
-        $employee = Employee::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'position_id' => $request->position_id,
-            'password' => Hash::make($request->password)
-        ]);
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
+
+        $employee =Employee::create($data);
 
         if ($employee) {
             Auth::login($employee);

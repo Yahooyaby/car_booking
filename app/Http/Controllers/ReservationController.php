@@ -9,12 +9,10 @@ class ReservationController extends Controller
 {
     public function store(ReservationRequest $request)
     {
-        $reservation = Reservation::create([
-            'employee_id' => $request->user()->id,
-            'car_id' => $request->car_id,
-            'started_at' => $request->started_at,
-            'ended_at' => $request->ended_at,
-        ]);
+        $data = $request->validated();
+        $data['employee_id'] = $request->user()->id;
+
+        $reservation = Reservation::create($data);
 
         return response()->json([
             'message' => 'Reservation created successfully',

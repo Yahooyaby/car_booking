@@ -19,7 +19,7 @@ class ReservationRequest extends FormRequest
             'car_id' => [
                 'required',
                 'exists:cars,id',
-                new CarAvailable($this->input('started_at'), $this->input('ended_at')),
+                new CarAvailable($this->started_at, $this->ended_at),
             ],
             'started_at' => 'required|date|after:now',
             'ended_at' => 'required|date|after:started_at',

@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\Models\Car;
+use App\Models\Reservation;
 use Illuminate\Contracts\Validation\Rule;
 
 class CarAvailable implements Rule
@@ -18,13 +18,12 @@ class CarAvailable implements Rule
 
     public function passes($attribute, $value)
     {
-        return Car::where('id', $value)
-            ->whereDoesntHave('reservations', function ($query) {
-                $query->where(function ($query) {
-                    $query->where('started_at', '<=', $this->endedAt)
-                        ->where('ended_at', '>=', $this->startedAt);
-                });
-            })->exists();
+        return !Reservation::where('car_id', $value)
+            ->where(function ($query) {
+                $query->where('started_at', '<=', $this->endedAt)
+                    ->where('ended_at', '>=', $this->startedAt);
+            })
+            ->exists();
     }
 
     public function message()

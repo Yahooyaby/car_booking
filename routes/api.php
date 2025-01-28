@@ -13,7 +13,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', LogoutController::class);
     Route::get('cars', CarController::class);
     Route::prefix('reservations')->group(function () {
-        Route::post('store', [ReservationController::class, 'store']);
-        Route::delete('delete', [ReservationController::class, 'delete']);
+        Route::post('/', [ReservationController::class, 'store']);
+        Route::delete('/{id}', [ReservationController::class, 'delete']);
     });
 });
