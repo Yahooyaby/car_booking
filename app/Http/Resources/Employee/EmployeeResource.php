@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\Employee;
 
-use App\Http\Resources\Position\PositionResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
