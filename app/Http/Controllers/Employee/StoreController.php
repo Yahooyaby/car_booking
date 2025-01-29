@@ -23,7 +23,7 @@ class StoreController extends Controller
             $token = $employee->createToken('EmployeeToken')->plainTextToken;
         }
 
-        return EmployeeResource::make($employee)->addiational([
+        return EmployeeResource::make($employee)->additional([
             'message' => 'Employee created successfully',
             'token' => $token ?? null
         ]);

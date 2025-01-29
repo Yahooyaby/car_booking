@@ -23,7 +23,7 @@ class ReservationController extends Controller
         $reservation = Reservation::create($data);
 
         return ReservationResource::make($reservation)->
-        addiational([
+        additional([
             'message' => 'Reservation created successfully'
         ]);
     }
@@ -31,6 +31,10 @@ class ReservationController extends Controller
     public function delete(int $id)
     {
         $reservation = Reservation::findOrFail($id);
+
+        if ($reservation?->employee_id != request()->user()->id) {
+            return response()->json(['message' => 'You cannot delete this reservation'], 403);
+        }
 
         $reservation->delete();
 
